@@ -1,6 +1,7 @@
 import os
 import yt_dlp
 import subprocess
+import re
 
 class YouTubeVideoDownloader:
     def __init__(self):
@@ -23,6 +24,18 @@ class YouTubeVideoDownloader:
     FUNCTION = "download_youtube_video"
     CATEGORY = "Doctor-Tools"
     
+    def sanitize_filename(self, title):
+        """Convert title to safe filename"""
+        # Remove invalid characters
+        safe_title = re.sub(r'[<>:"/\\|?*]', '', title)
+        # Replace spaces with underscores
+        safe_title = safe_title.replace(' ', '_')
+        # Remove any other problematic characters
+        safe_title = re.sub(r'[^\w\-_.]', '', safe_title)
+        # Limit length
+        safe_title = safe_title[:100]  # Limit to 100 characters
+        return safe_title
+    
     def convert_mkv_to_mp4(self, mkv_path):
         """Convert MKV to MP4 using FFmpeg"""
         mp4_path = mkv_path.replace('.mkv', '.mp4')
@@ -44,14 +57,28 @@ class YouTubeVideoDownloader:
             os.makedirs(download_path, exist_ok=True)
             print(f"[INFO] Download path verified or created at: {download_path}")
             
-            # Create unique filenames
-            import time
-            timestamp = int(time.time())
-            video_path = os.path.join(download_path, f'video_{timestamp}.mkv')
-            audio_path = os.path.join(download_path, f'audio_{timestamp}.wav')
-            final_video_path = video_path  # Will be updated if converted to MP4
+            # First get video info to get the title
+            print("[INFO] Getting video information...")
+            with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
+                info = ydl.extract_info(youtube_url, download=False)
+                video_title = self.sanitize_filename(info['title'])
+                print(f"[INFO] Video title: {info['title']}")
             
-            # First download audio as WAV
+            # Create filenames based on video title
+            base_filename = video_title
+            # If file already exists, append number
+            counter = 1
+            while os.path.exists(os.path.join(download_path, f"{base_filename}.mkv")) or \
+                  os.path.exists(os.path.join(download_path, f"{base_filename}.mp4")) or \
+                  os.path.exists(os.path.join(download_path, f"{base_filename}.wav")):
+                base_filename = f"{video_title}_{counter}"
+                counter += 1
+            
+            video_path = os.path.join(download_path, f"{base_filename}.mkv")
+            audio_path = os.path.join(download_path, f"{base_filename}.wav")
+            final_video_path = video_path
+            
+            # Download audio as WAV
             print("[INFO] Downloading and extracting audio...")
             ydl_opts_audio = {
                 'format': 'bestaudio',
@@ -77,7 +104,7 @@ class YouTubeVideoDownloader:
             # If audio_only is True, skip video download
             if audio_only:
                 print("[INFO] Audio-only mode: Skipping video download")
-                return ("", audio_path)  # Return empty string for video path
+                return ("", audio_path)
             
             # Download video
             print("[INFO] Downloading video...")
@@ -96,8 +123,8 @@ class YouTubeVideoDownloader:
             }
             
             with yt_dlp.YoutubeDL(ydl_opts_video) as ydl:
-                info = ydl.extract_info(youtube_url, download=True)
-                print(f"[INFO] Video download completed with format: {info.get('format', 'unknown')}")
+                ydl.extract_info(youtube_url, download=True)
+                print(f"[INFO] Video download completed")
             
             # Convert to MP4 if requested
             if save_as_mp4:
