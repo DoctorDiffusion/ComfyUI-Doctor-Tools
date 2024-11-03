@@ -12,29 +12,24 @@ class YouTubeVideoDownloader:
         return {
             "required": {
                 "youtube_url": ("STRING", {"default": ""}),
-                "download_path": ("STRING", {"default": "D:/ComfyUI_downloads"}),
+                "download_path": ("STRING", {"default": "D:\\ComfyUI_windows_portable\\ComfyUI\\downloads"}),
                 "resolution": (["360p", "480p", "720p", "1080p"], {"default": "720p"}),
                 "save_as_mp4": ("BOOLEAN", {"default": False}),
                 "audio_only": ("BOOLEAN", {"default": False})
             }
         }
     
-    RETURN_TYPES = ("STRING", "STRING")
+    RETURN_TYPES = ("STRING", "STRING")  # Remove the embed video output
     RETURN_NAMES = ("video_path", "audio_path")
     FUNCTION = "download_youtube_video"
     CATEGORY = "Doctor-Tools"
     
     def sanitize_filename(self, title):
         """Convert title to safe filename"""
-        # Remove invalid characters
         safe_title = re.sub(r'[<>:"/\\|?*]', '', title)
-        # Replace spaces with underscores
         safe_title = safe_title.replace(' ', '_')
-        # Remove any other problematic characters
         safe_title = re.sub(r'[^\w\-_.]', '', safe_title)
-        # Limit length
-        safe_title = safe_title[:100]  # Limit to 100 characters
-        return safe_title
+        return safe_title[:100]  # Limit to 100 characters
     
     def convert_mkv_to_mp4(self, mkv_path):
         """Convert MKV to MP4 using FFmpeg"""
@@ -42,7 +37,6 @@ class YouTubeVideoDownloader:
         try:
             cmd = ['ffmpeg', '-i', mkv_path, '-codec', 'copy', mp4_path, '-y']
             subprocess.run(cmd, check=True, capture_output=True)
-            # Remove original MKV if MP4 conversion successful
             if os.path.exists(mp4_path) and os.path.getsize(mp4_path) > 0:
                 os.remove(mkv_path)
                 return mp4_path
@@ -53,20 +47,16 @@ class YouTubeVideoDownloader:
     
     def download_youtube_video(self, youtube_url, download_path, resolution, save_as_mp4, audio_only):
         try:
-            # Ensure the download directory exists
             os.makedirs(download_path, exist_ok=True)
             print(f"[INFO] Download path verified or created at: {download_path}")
             
-            # First get video info to get the title
             print("[INFO] Getting video information...")
             with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
                 info = ydl.extract_info(youtube_url, download=False)
                 video_title = self.sanitize_filename(info['title'])
                 print(f"[INFO] Video title: {info['title']}")
             
-            # Create filenames based on video title
             base_filename = video_title
-            # If file already exists, append number
             counter = 1
             while os.path.exists(os.path.join(download_path, f"{base_filename}.mkv")) or \
                   os.path.exists(os.path.join(download_path, f"{base_filename}.mp4")) or \
@@ -77,12 +67,11 @@ class YouTubeVideoDownloader:
             video_path = os.path.join(download_path, f"{base_filename}.mkv")
             audio_path = os.path.join(download_path, f"{base_filename}.wav")
             final_video_path = video_path
-            
-            # Download audio as WAV
+
             print("[INFO] Downloading and extracting audio...")
             ydl_opts_audio = {
                 'format': 'bestaudio',
-                'outtmpl': audio_path[:-4],  # Remove .wav as it will be added by postprocessor
+                'outtmpl': audio_path[:-4],
                 'postprocessors': [{
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'wav',
@@ -95,20 +84,17 @@ class YouTubeVideoDownloader:
             with yt_dlp.YoutubeDL(ydl_opts_audio) as ydl:
                 ydl.extract_info(youtube_url, download=True)
             
-            # Verify audio file
             if not os.path.exists(audio_path):
                 raise FileNotFoundError(f"Audio file not found at {audio_path}")
             if os.path.getsize(audio_path) == 0:
                 raise ValueError(f"Downloaded audio file is empty: {audio_path}")
-            
-            # If audio_only is True, skip video download
+
             if audio_only:
                 print("[INFO] Audio-only mode: Skipping video download")
                 return ("", audio_path)
             
-            # Download video
             print("[INFO] Downloading video...")
-            height = resolution[:-1]  # Remove 'p' from resolution
+            height = resolution[:-1]
             
             ydl_opts_video = {
                 'format': f'bestvideo[height<={height}][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
@@ -124,9 +110,8 @@ class YouTubeVideoDownloader:
             
             with yt_dlp.YoutubeDL(ydl_opts_video) as ydl:
                 ydl.extract_info(youtube_url, download=True)
-                print(f"[INFO] Video download completed")
+                print("[INFO] Video download completed")
             
-            # Convert to MP4 if requested
             if save_as_mp4:
                 print("[INFO] Converting to MP4...")
                 final_video_path = self.convert_mkv_to_mp4(video_path)
@@ -135,7 +120,6 @@ class YouTubeVideoDownloader:
                 else:
                     print("[WARNING] MP4 conversion failed, keeping MKV format")
             
-            # Verify video file
             if not os.path.exists(final_video_path):
                 raise FileNotFoundError(f"Video file not found at {final_video_path}")
             if os.path.getsize(final_video_path) == 0:
@@ -143,7 +127,7 @@ class YouTubeVideoDownloader:
             
             print(f"[INFO] Files saved to:\nVideo: {final_video_path}\nAudio: {audio_path}")
             
-            return (final_video_path, audio_path)
+            return (final_video_path, audio_path)  # Only return video and audio paths
             
         except Exception as e:
             error_message = f"[ERROR] Error during download: {str(e)}"
