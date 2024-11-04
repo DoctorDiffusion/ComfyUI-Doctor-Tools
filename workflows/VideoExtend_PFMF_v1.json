@@ -1,0 +1,723 @@
+{
+  "last_node_id": 22,
+  "last_link_id": 22,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "FinalFrameSelector",
+      "pos": {
+        "0": 110,
+        "1": 490
+      },
+      "size": {
+        "0": 252,
+        "1": 26
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12,
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FinalFrameSelector"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "PyramidFlowVAEEncode",
+      "pos": {
+        "0": 443,
+        "1": 309
+      },
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae",
+          "type": "PYRAMIDFLOWVAE",
+          "link": 14
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            16
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PyramidFlowVAEEncode"
+      },
+      "widgets_values": [
+        false
+      ]
+    },
+    {
+      "id": 1,
+      "type": "VHS_LoadVideo",
+      "pos": {
+        "0": -251,
+        "1": 41
+      },
+      "size": {
+        "0": 249.4166717529297,
+        "1": 310
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3,
+            8
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "links": null,
+          "slot_index": 1
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "Mochi_preview_00623.mp4",
+        "force_rate": 0,
+        "force_size": "Custom",
+        "custom_width": 640,
+        "custom_height": 384,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "force_rate": 0,
+            "select_every_nth": 1,
+            "filename": "Mochi_preview_00623.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "force_size": "640x384"
+          },
+          "muted": false
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": "PyramidFlowVAEDecode",
+      "pos": {
+        "0": 1145,
+        "1": 51
+      },
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae",
+          "type": "PYRAMIDFLOWVAE",
+          "link": 18
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            19
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PyramidFlowVAEDecode"
+      },
+      "widgets_values": [
+        256,
+        2,
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "PyramidFlowTextEncode",
+      "pos": {
+        "0": 407,
+        "1": 43
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt_embeds",
+          "type": "PYRAMIDFLOWPROMPT",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PyramidFlowTextEncode"
+      },
+      "widgets_values": [
+        "close up: Gaming PC with RTX 3090TI on fire melting hot in the computer tower on a desk",
+        "cartoon style, worst quality, low quality, blurry, absolute black, absolute white, low res, extra limbs, extra digits, misplaced objects, mutated anatomy, monochrome, horror",
+        true
+      ]
+    },
+    {
+      "id": 17,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 11,
+        "1": 196
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            15
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp16.safetensors",
+        "flux"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "PyramidFlowVAELoader",
+      "pos": {
+        "0": 9,
+        "1": 354
+      },
+      "size": {
+        "0": 355.20001220703125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "compile_args",
+          "type": "MOCHICOMPILEARGS",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pyramidflow_vae",
+          "type": "PYRAMIDFLOWVAE",
+          "links": [
+            14,
+            18
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PyramidFlowVAELoader"
+      },
+      "widgets_values": [
+        "pyramid_flow_vae_fp32.safetensors",
+        "fp32"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "PyramidFlowTransformerLoader",
+      "pos": {
+        "0": 10,
+        "1": 38
+      },
+      "size": {
+        "0": 380.4000244140625,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "compile_args",
+          "type": "MOCHICOMPILEARGS",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pyramidflow_model",
+          "type": "PYRAMIDFLOWMODEL",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PyramidFlowTransformerLoader"
+      },
+      "widgets_values": [
+        "pyramid_flow_miniflux_bf16_v2.safetensors",
+        "bf16",
+        false
+      ]
+    },
+    {
+      "id": 15,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 439,
+        "1": 445
+      },
+      "size": {
+        "0": 441.89764404296875,
+        "1": 407.7856140136719
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 5,
+      "type": "VideoMerge",
+      "pos": {
+        "0": 1475,
+        "1": 53
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Video_A",
+          "type": "IMAGE",
+          "link": 3
+        },
+        {
+          "name": "Video_B",
+          "type": "IMAGE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            6,
+            20
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VideoMerge"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 19,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1867,
+        "1": 35
+      },
+      "size": {
+        "0": 1631.7423095703125,
+        "1": 1159.5570068359375
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 20
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 3,
+      "type": "VHS_VideoCombine",
+      "pos": {
+        "0": 1146,
+        "1": 221
+      },
+      "size": [
+        700.1729736328125,
+        732.1037841796874
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 6
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "PyramidFlowMiniFlux",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "PyramidFlowMiniFlux_00003.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 24
+          },
+          "muted": false
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": "PyramidFlowSampler",
+      "pos": {
+        "0": 818,
+        "1": 45
+      },
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "PYRAMIDFLOWMODEL",
+          "link": 11
+        },
+        {
+          "name": "prompt_embeds",
+          "type": "PYRAMIDFLOWPROMPT",
+          "link": 10
+        },
+        {
+          "name": "input_latent",
+          "type": "LATENT",
+          "link": 16,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            17
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PyramidFlowSampler"
+      },
+      "widgets_values": [
+        640,
+        384,
+        "20, 20, 20",
+        "10, 10, 10",
+        16,
+        7.5,
+        4.5,
+        400804863406326,
+        "randomize",
+        false
+      ]
+    }
+  ],
+  "links": [
+    [
+      3,
+      1,
+      0,
+      5,
+      0,
+      "IMAGE"
+    ],
+    [
+      6,
+      5,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      8,
+      1,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      10,
+      11,
+      0,
+      10,
+      1,
+      "PYRAMIDFLOWPROMPT"
+    ],
+    [
+      11,
+      12,
+      0,
+      10,
+      0,
+      "PYRAMIDFLOWMODEL"
+    ],
+    [
+      12,
+      6,
+      0,
+      14,
+      1,
+      "IMAGE"
+    ],
+    [
+      13,
+      6,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      16,
+      0,
+      14,
+      0,
+      "PYRAMIDFLOWVAE"
+    ],
+    [
+      15,
+      17,
+      0,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      16,
+      14,
+      0,
+      10,
+      2,
+      "LATENT"
+    ],
+    [
+      17,
+      10,
+      0,
+      18,
+      1,
+      "LATENT"
+    ],
+    [
+      18,
+      16,
+      0,
+      18,
+      0,
+      "PYRAMIDFLOWVAE"
+    ],
+    [
+      19,
+      18,
+      0,
+      5,
+      1,
+      "IMAGE"
+    ],
+    [
+      20,
+      5,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917356,
+      "offset": [
+        268.67676681642007,
+        37.7457542884765
+      ]
+    }
+  },
+  "version": 0.4
+}
