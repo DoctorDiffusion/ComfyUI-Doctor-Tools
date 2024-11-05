@@ -15,6 +15,10 @@ class VideoPromptGenerator:
         return {
             "required": {
                 "subject": ("STRING", {}),
+                "adjectives": (
+                    ["random"] + VideoPromptGenerator.ADJECTIVES,
+                    {"default": "random"},
+                ),
                 "shot_type": (
                     ["random"] + VideoPromptGenerator.SHOT_TYPE,
                     {"default": "random"},
@@ -29,6 +33,7 @@ class VideoPromptGenerator:
                     {"default": "random"},
                 ),
                 "location": (["random"] + VideoPromptGenerator.LOCATION, {"default": "random"}),
+                "modifiers": (["random"] + VideoPromptGenerator.MODIFIERS, {"default": "random"}),
                 "lighting": (
                     ["random"] + VideoPromptGenerator.LIGHTING,
                     {"default": "random"},
@@ -36,54 +41,59 @@ class VideoPromptGenerator:
             },
         }
 
+    ADJECTIVES = [
+        "",
+	"bloody",
+	"angry",
+	"fat",
+	"stoic",
+	"old",
+        "cool",
+    ]
     SHOT_TYPE = [
         "",
-	"aerial shot",
-        "bird's-eye view",
-        "close-up",
-        "cowboy shot",
-        "crane shot",
-        "cut-in",
-        "cutaway",
-        "dolly shot",
-        "dolly zoom left",
-        "dolly zoom right",
-        "dutch angle",
-        "establishing shot",
-        "extreme close-up",
-        "extreme long shot",
-        "eye-level shot",
-        "follow shot",
-        "high-angle shot",
-        "insert shot",
-        "low-angle shot",
-        "master shot",
-        "medium close-up",
-        "medium shot",
-        "over-the-shoulder shot",
-        "pan left",
-        "pan right",
-        "point-of-view (POV) shot",
-        "pull-back shot",
-        "reaction shot",
-        "reverse-angle shot",
-        "tilt up",
-        "tilt down",
-        "tracking shot",
-        "two-shot",
-        "wide shot",
+	"aerial shot:",
+        "bird's-eye view:",
+        "close-up:",
+        "crane shot:",
+        "fpv drone shot:",
+        "dolly shot:",
+        "dolly zoom left:",
+        "dolly zoom right:",
+        "dutch angle:",
+        "establishing shot:",
+        "extreme close-up:",
+        "extreme long shot:",
+        "eye-level shot:",
+        "follow shot:",
+        "high-angle shot:",
+        "low-angle shot:",
+        "medium close-up:",
+        "medium shot:",
+        "over-the-shoulder shot:",
+        "pan left:",
+        "pan right:",
+        "point-of-view (POV) shot:",
+        "pull-back shot:",
+        "reaction shot:",
+        "reverse-angle shot:",
+        "tilt up:",
+        "tilt down:",
+        "tracking shot:",
+        "two-shot:",
+        "wide shot:",
     ]
 
     ACTIONS = [
         "",
-        "adjusting clothing",
+        "crosses a street",
         "answering the phone",
-        "apologizing sincerely",
-        "arguing intensely",
-        "asking a question",
+        "driving a sports car",
+        "shooting a gun",
+        "screaming",
         "biting lip nervously",
         "blinking rapidly",
-        "brushing hair back",
+        "shrinking",
         "bursting into laughter",
         "checking their watch",
         "clapping hands excitedly",
@@ -134,18 +144,18 @@ class VideoPromptGenerator:
         "fixing gaze intensely",
         "rolling eyes",
         "crossing legs casually",
-        "adjusting glasses",
+        "throws poop at the camera",
         "reaching out",
-        "placing hand on heart",
-        "taking a deep breath",
-        "scanning the room",
-        "mouthing words silently",
-        "putting hands in pockets",
-        "shaking hands warmly",
+        "peeling of thier face",
+        "playing russian roulette",
+        "being chased by a killer",
+        "on a skateboard",
+        "holding a knife",
+        "flying an airplane",
         "narrowing eyes suspiciously",
         "opening a door cautiously",
         "holding their head in pain",
-        "wringing hands nervously",
+        "sitting on a toilet",
         "breaking into a run",
         "throwing hands in the air",
         "snapping fingers",
@@ -154,11 +164,20 @@ class VideoPromptGenerator:
 
     STYLE = [
         "",
-	"Cinematic",
+	"cinematic",
         "cctv footage",
         "surrealism",
         "futurism",
-        "music video"
+        "1980s horror movie",
+        "1990s hip hop video",
+        "documentary",
+        "futurism",
+        "3D animation",
+        "anime",
+        "cartoon",
+        "3D render",
+        "2003 action movie",
+        "music video",
 
     ]
 
@@ -166,6 +185,9 @@ class VideoPromptGenerator:
         "",
 	"David Fincher",
         "Quentin Tarantino",
+        "Martin Scorsese",
+        "Steven Spielberg",
+        "George Lucas",
     ]
 
     LOCATION = [
@@ -178,12 +200,12 @@ class VideoPromptGenerator:
         "at a party",
         "at a festival",
         "at a concert",
-        "on persons home planet",
-        "magical portal with particles",
+        "on the moon",
+        "infront of a magical portal with particles",
         "in a neon lit city",
         "in a cyberpunk city",
         "in a fantasy world",
-        "fashion show",
+        "at a fashion show",
         "at home",
         "at work",
         "at a cafe",
@@ -201,19 +223,19 @@ class VideoPromptGenerator:
         "in a mystical island filled with ancient ruins and hidden treasure",
         "in a faraway planet with a unique and alien landscape",
         "in a hidden paradise hidden behind a waterfall",
-        "in a dreamlike world where anything is possible and the impossible is real",
+        "in a church",
         "in a hidden oasis in the desert",
         "in a secret underground city",
         "in an underwater kingdom",
         "in a lost temple in the jungle",
         "in a castle in the clouds",
         "in a hidden valley in the mountains",
-        "in a uturistic city on a distant planet",
+        "in a alien city on a distant planet",
         "in a mystical land of eternal twilight",
-        "Smoke and ash in the air",
-        "suburban america", 
-        "suburbs", 
-        "slums", 
+        "infront of the USA flag",
+        "in suburban america", 
+        "in the suburbs", 
+        "in the slums", 
         "at the sea", 
         "at the ocean",
         "at the lake",
@@ -222,30 +244,33 @@ class VideoPromptGenerator:
         "in the labyrinth",
         "in a lab"
     ]
+
+    MODIFIERS = [
+        "",
+	"glitchy",
+	"creepy",
+	"abstract",
+	"slow-motion",
+	"static shot",
+        "retro",
+    ]
+
     LIGHTING = [
         "",
-	"popping colors, popart style",
-        "bokeh",
         "dramatic lighting",
-        "golden hour",
+        "shot at golden hour",
         "colorful lighting",
         "soft lighting",
         "studio lighting with strong rim light",
         "ambient lighting",
         "sun rays",
         "cinematic lighting",
-        "characteristics of the light",
         "volumetric lighting",
-        "natural point rose",
         "outdoor lighting",
         "soft pastel lighting colors scheme",
         "sensual lighting",
         "neon lights",
-        "baroque",
-        "rokoko",
         "rim light, iridescent accents",
-        "neoclassicism",
-        "realism",
         "fantastic colors",
         "accent lighting",
         "high key lighting",
@@ -256,86 +281,40 @@ class VideoPromptGenerator:
         "multi-colored lighting",
         "mood lighting",
         "accent lighting",
-        "projection lighting",
         "bioluminiscent",
         "anamorphic lens flare",
-        "sharp focus",
-        "vivid colors",
-        "masterpiece",
-        "colors",
-        "8k",
         "atmospheric",
         "cinematic sensual",
-        "hyperrealistic",
-        "big depth of field",
         "glow effect",
-        "modelshoot style",
         "shallow depth of field",
         "hdr",
         "dynamic composition",
         "broad light",
         "natural lighting",
-        "elegant pose",
-        "flowing",
-        "film photo",
-        "extremely detailed",
-        "big depth of field",
-        "matte skin, pores, wrinkles",
-        "hyperdetailed",
-        "(abstract:1.3)",
-        "intricate and low contrast detailed",
-        "(composition)",
-        "film grain",
-        "(8k, RAW photo, best quality, masterpiece:1.2)",
-        "(realistic, photo-realistic:1.37)",
-        "beautiful detailed eyes, beautiful detailed lips, a captivating gaze, and an alluring expression",
         "beautiful dynamic dramatic dark moody lighting",
-        "(detailed face:1.3)",
-        "multilayered realism",
-        "majestically strides forward toward us with abandon",
-        "disintegrating moon",
-        "extremely intricate details",
-        "anatomical beauty",
-        "high fantasy",
-        "detailed skin pores",
         "flat color scheme",
-        "80s music clip background",
-        "Use a backlighting effect to add depth to the image. impressionistic painting style, john singer sarget, blue pallette",
-        "(natural skin texture, hyperrealism, soft light, sharp:1.2)",
-        "(cinematic, teal and orange:0.85)",
-        "(intricate skin detail:1.3), (wrinkles:1.2),(skin blemishes:1.1),(skin pores:1.1),(detailed face:1.3), (lips slightly parted:1.0)",
         "(muted colors, dim colors, soothing tones:1.3), low saturation, (hyperdetailed:1.2)",
         "(noir:0.4), (intricate details:1.12), hdr, (intricate details, hyperdetailed:1.15)",
-        "(neutral colors:1.2), art, (hdr:1.5), (muted colors:1.1), (pastel:0.2), hyperdetailed",
-        "dramatic lighting",
-        "((landscape view)), 4k unity, (best illumination)",
-        "dynamic angle",
-        "detailed freckles skin",
-        "movie grain",
-        "epic composition",
-        "Tarot Card style",
-        "(solo focus, one frame)",
-        "(masterpiece, best quality, ultra-detailed, highres)",
-        "biopunk",
-        "dramatic Pull from the ghost of a virtual memory",
-        "gritty industrial",
-        "(soothing tones, insane details, intricate details, hyperdetailed,photorealistic,dim subdued lighting)",
     ]
     @staticmethod
     def generate_prompt(**kwargs):
         components = []
 
-        # Get subject
-        subject = kwargs.get("subject", "")
-        if subject.lower() == "random":
-            subject = random.choice(VideoPromptGenerator.SUBJECT)  # Ensure SUBJECT list is defined
-        components.append(subject)
-
-        # Get shot type
+        # Get shot type (first in the prompt)
         shot_type = kwargs.get("shot_type", "")
         if shot_type.lower() == "random":
             shot_type = random.choice(VideoPromptGenerator.SHOT_TYPE)
         components.append(shot_type)
+
+        # Get adjectives (to appear before subject in the prompt)
+        adjectives = kwargs.get("adjectives", "")
+        if adjectives.lower() == "random":
+            adjectives = random.choice(VideoPromptGenerator.ADJECTIVES)
+        components.append(adjectives)
+
+        # Get subject (after adjectives in the prompt, first in the UI)
+        subject = kwargs.get("subject", "")
+        components.append(subject)
 
         # Get location
         location = kwargs.get("location", "")
@@ -355,7 +334,13 @@ class VideoPromptGenerator:
             director = random.choice(VideoPromptGenerator.DIRECTOR)
         components.append(f"by {director}")
 
-        # Get lighting
+        # Get Modifiers (before lighting in the prompt)
+        modifiers = kwargs.get("modifiers", "")
+        if modifiers.lower() == "random":
+            modifiers = random.choice(VideoPromptGenerator.MODIFIERS)
+        components.append(modifiers)
+
+        # Get lighting (last element in the prompt)
         lighting = kwargs.get("lighting", "")
         if lighting.lower() == "random":
             selected_lighting = ", ".join(random.sample(VideoPromptGenerator.LIGHTING, random.randint(2, 5)))
@@ -363,16 +348,16 @@ class VideoPromptGenerator:
             selected_lighting = lighting
         components.append(selected_lighting)
 
+        # Join components to form the final prompt
         prompt = " ".join(filter(None, components))
         print(f"AUTOPROMPT: {prompt}")
         return (prompt,)
 
-# Ensure these mappings point to the correct class
+# Mappings for ComfyUI
 NODE_CLASS_MAPPINGS = {
     "VideoPromptGenerator": VideoPromptGenerator,
 }
 
-# Human readable names for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
     "VideoPromptGenerator": "Video Prompt Generator",
 }
