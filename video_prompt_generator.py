@@ -49,6 +49,11 @@ class VideoPromptGenerator:
 	"stoic",
 	"old",
         "cool",
+	"bearded",
+	"happy",
+	"vintage",
+	"flaming",
+        "icy",
     ]
     SHOT_TYPE = [
         "",
