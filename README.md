@@ -1,5 +1,5 @@
 # MediaMixer
-
+A node suite for downloading audio and video from youtube as we all sevral useful video utilits such as a final frame selector and a node that merges two videos into one.
 ****
 
 ## Installation
