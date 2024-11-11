@@ -3,15 +3,18 @@
 ****
 
 ## Installation
-
-```bash
-git clone [https://github.com/DoctorDiffusion/ComfyUI-MediaMixer.git]
+```
+git clone https://github.com/DoctorDiffusion/ComfyUI-MediaMixer.git
+```
+```
 cd MediaMixer
+```
+```
 pip install -r requirements.txt
 ```
 If this fails to install yt_dlp:
 ```bash
-...python.exe -s -m pip install yt_dlp
+.\python_embed\python.exe -s -m pip install yt_dlp
 ```
 
 ## Nodes
