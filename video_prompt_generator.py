@@ -4,7 +4,7 @@ import nodes
 class VideoPromptGenerator:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "generate_prompt"
-    CATEGORY = "Doctor-Tools"
+    CATEGORY = "MediaMixer"
 
     @classmethod
     def IS_CHANGED(cls):

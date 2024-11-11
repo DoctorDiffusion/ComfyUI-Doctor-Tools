@@ -15,7 +15,7 @@ class VideoMerge:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "merge_videos"
-    CATEGORY = "Doctor-Tools"
+    CATEGORY = "MediaMixer"
 
     def merge_videos(self, Video_A, Video_B):
         # Ensure both inputs are 4D tensors

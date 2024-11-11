@@ -14,7 +14,7 @@ class FinalFrameSelector:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "process_images"
-    CATEGORY = "Doctor-Tools"  # Changed category name
+    CATEGORY = "MediaMixer"
 
     def process_images(self, images):
         # Handle multiple images
