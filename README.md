@@ -25,7 +25,11 @@ If this fails to install yt_dlp:
 Final Frame Selector takes an image sequence or video and passes through the final frame as an image node. 
 This works great for extending video with image-to-video tools like Pyramid-Flow. 
 
-### Video Mere Node
+### Reverse Frame Sequence
+
+Inverse the order of the images in a frame sequence with this node to easily reverse videos.
+
+### Video Merge Node
 
 The Video Merge node allows you to combine two video clips within ComfyUI.
 Plug the input video into "Video_A" and your output render into "Video_B" to combine your extended video.
