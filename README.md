@@ -3,6 +3,7 @@ A node suite for downloading audio and video from youtube as we all sevral usefu
 ****
 
 ## Installation
+Use the world famous [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager) or manually install:
 ```
 git clone https://github.com/DoctorDiffusion/ComfyUI-MediaMixer.git
 ```
@@ -38,6 +39,8 @@ Plug the input video into "Video_A" and your output render into "Video_B" to com
 ## Credits
 
 - [comfyanonymous/ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+
+- [ltdrdata/ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager)
 
 - [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)
 
