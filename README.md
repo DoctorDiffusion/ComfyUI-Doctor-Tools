@@ -20,15 +20,6 @@ If this fails to install yt_dlp:
 
 ## Nodes
 
-### Final Frame Selector
-
-Final Frame Selector takes an image sequence or video and passes through the final frame as an image node. 
-This works great for extending video with image-to-video tools like Pyramid-Flow. 
-
-### Reverse Frame Sequence
-
-Inverse the order of the images in a frame sequence with this node to easily reverse videos.
-
 ### Prompt Journal
 
 Take a list of text and output a single row as a string of text. Use with a primitive to randomize or have further control.
@@ -40,11 +31,20 @@ Take a list of text and output a single row as a string of text. Use with a prim
 The Video Merge node allows you to combine two video clips within ComfyUI.
 Plug the input video into "Video_A" and your output render into "Video_B" to combine your extended video.
 
+### Final Frame Selector
+
+Final Frame Selector takes an image sequence or video and passes through the final frame as an image node. 
+This works great for extending video with image-to-video tools like Pyramid-Flow, CogVideoX, and LTX-Video. 
+
 ![Screenshot 2024-11-01 190029](https://github.com/user-attachments/assets/be4a1d0b-ae14-4ece-92f0-87fbcc98fe0f)
 
 ### YouTube Video Downloader
 
 ![Screenshot 2024-11-01 190304](https://github.com/user-attachments/assets/0ed0e432-1c7c-4911-8110-39d9be58e43e)
+
+### Reverse Frame Sequence
+
+Inverse the order of the images in a frame sequence with this node to easily reverse videos.
 
 ## Credits
 
