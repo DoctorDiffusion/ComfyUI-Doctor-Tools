@@ -8,7 +8,7 @@ Use the world famous [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manag
 git clone https://github.com/DoctorDiffusion/ComfyUI-MediaMixer.git
 ```
 ```
-cd MediaMixer
+cd ComfyUI-MediaMixer
 ```
 ```
 pip install -r requirements.txt
