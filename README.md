@@ -33,6 +33,8 @@ Inverse the order of the images in a frame sequence with this node to easily rev
 
 Take a list of text and output a single row as a prompt. Use with a primitive to randomize or have further control.
 
+![Screenshot 2024-11-23 150431](https://github.com/user-attachments/assets/b5e8eaab-5d51-4e91-b17f-07c1cb422d52)
+
 ### Video Merge Node
 
 The Video Merge node allows you to combine two video clips within ComfyUI.
