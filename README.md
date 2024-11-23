@@ -31,7 +31,7 @@ Inverse the order of the images in a frame sequence with this node to easily rev
 
 ### Prompt Journal
 
-Take a list of text and output a single row as a prompt. Use with a primitive to randomize or have further control.
+Take a list of text and output a single row as a string of text. Use with a primitive to randomize or have further control.
 
 ![Screenshot 2024-11-23 150431](https://github.com/user-attachments/assets/b5e8eaab-5d51-4e91-b17f-07c1cb422d52)
 
