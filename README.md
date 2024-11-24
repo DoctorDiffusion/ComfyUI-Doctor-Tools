@@ -24,7 +24,7 @@ If this fails to install yt_dlp to your desired python environment, use the foll
 
 ### Prompt Journal
 
-Take a list of text and output a single row as a string of text. Use with a primitive to randomize or have further control.
+Take a list of text and output a single row as a string of text from the top outout string and/or the full text from the second string output. Use with a primitive to randomize or have further control.
 
 ![Screenshot 2024-11-23 150431](https://github.com/user-attachments/assets/b5e8eaab-5d51-4e91-b17f-07c1cb422d52)
 
