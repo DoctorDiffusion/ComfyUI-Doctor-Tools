@@ -4,6 +4,8 @@ A node suite for downloading audio and video from youtube as we all sevral usefu
 
 ## Installation
 Use the world famous [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager) or manually install:
+
+Navagate to your custom node folder `...ComfyUI/custom_nodes`
 ```
 git clone https://github.com/DoctorDiffusion/ComfyUI-MediaMixer.git
 ```
@@ -13,7 +15,7 @@ cd ComfyUI-MediaMixer
 ```
 pip install -r requirements.txt
 ```
-If this fails to install yt_dlp:
+If this fails to install yt_dlp to your desired python environment, use the following comand:
 ```bash
 .\python_embed\python.exe -s -m pip install yt_dlp
 ```
