@@ -42,11 +42,13 @@ This works great for extending video with image-to-video tools like Pyramid-Flow
 
 ### YouTube Video Downloader
 
-![Screenshot 2024-11-01 190304](https://github.com/user-attachments/assets/0ed0e432-1c7c-4911-8110-39d9be58e43e)
+![Screenshot 2024-11-26 121720](https://github.com/user-attachments/assets/a110e845-81e3-43aa-b547-b123ca4d98fb)
 
 ### Reverse Frame Sequence
 
 Inverse the order of the images in a frame sequence with this node to easily reverse videos.
+
+![Screenshot 2024-11-26 121318](https://github.com/user-attachments/assets/6122641e-0b72-4c8a-96f9-c819b80f6711)
 
 ## Credits
 
