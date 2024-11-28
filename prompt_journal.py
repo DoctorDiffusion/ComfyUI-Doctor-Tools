@@ -14,7 +14,7 @@ class PromptJournal:
 
     RETURN_TYPES = ("STRING", "STRING")
     FUNCTION = "process"
-    CATEGORY = "MediaMixer"
+    CATEGORY = "🎬🔀MediaMixer"
 
     def process(self, prompts, prompt_number):
         self.prompts = prompts.split('\n')

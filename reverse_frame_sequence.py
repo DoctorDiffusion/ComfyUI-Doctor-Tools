@@ -14,7 +14,7 @@ class ReverseFrameSequence:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "reverse_sequence"
-    CATEGORY = "MediaMixer"
+    CATEGORY = "🎬🔀MediaMixer"
 
     def reverse_sequence(self, Images):
         # Ensure input is a 4D tensor (batch of images)

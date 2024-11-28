@@ -22,7 +22,7 @@ class YouTubeVideoDownloader:
     RETURN_TYPES = ("STRING", "STRING")  # Remove the embed video output
     RETURN_NAMES = ("video_path", "audio_path")
     FUNCTION = "download_youtube_video"
-    CATEGORY = "MediaMixer"
+    CATEGORY = "🎬🔀MediaMixer"
     
     def sanitize_filename(self, title):
         """Convert title to safe filename"""
