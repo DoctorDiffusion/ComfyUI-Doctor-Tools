@@ -1,4 +1,4 @@
-# MediaMixer
+# 🎬🔀MediaMixer
 A node suite for downloading audio and video from youtube as we all sevral useful video utilits such as a final frame selector and a node that merges two videos into one.
 ****
 
@@ -33,10 +33,10 @@ Take a list of text and output a single row as a string of text from the top out
 The Video Merge node allows you to combine two video clips within ComfyUI.
 Plug the input video into "Video_A" and your output render into "Video_B" to combine your extended video.
 
-### Final Frame Selector
+### Final & First Frame Selector
 
 Final Frame Selector takes an image sequence or video and passes through the final frame as an image node. 
-This works great for extending video with image-to-video tools like Pyramid-Flow, CogVideoX, and LTX-Video. 
+This works great for extending video with image-to-video tools like Pyramid-Flow, CogVideoX, and LTX-Video. First Frame Selector will do the same but with the first frame, this was a requested node.
 
 ![Screenshot 2024-11-01 190029](https://github.com/user-attachments/assets/be4a1d0b-ae14-4ece-92f0-87fbcc98fe0f)
 
