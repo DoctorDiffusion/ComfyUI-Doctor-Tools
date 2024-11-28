@@ -36,7 +36,9 @@ Plug the input video into "Video_A" and your output render into "Video_B" to com
 ### Final & First Frame Selector
 
 Final Frame Selector takes an image sequence or video and passes through the final frame as an image node. 
-This works great for extending video with image-to-video tools like Pyramid-Flow, CogVideoX, and LTX-Video. First Frame Selector will do the same but with the first frame, this was a requested node.
+This works great for extending video with image-to-video tools like Pyramid-Flow, CogVideoX, and LTX-Video. <br>
+<br>
+First Frame Selector will do the same but with the first frame, this was a requested node.
 
 ![Screenshot 2024-11-01 190029](https://github.com/user-attachments/assets/be4a1d0b-ae14-4ece-92f0-87fbcc98fe0f)
 
