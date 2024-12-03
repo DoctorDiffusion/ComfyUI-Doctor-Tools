@@ -1,20 +1,20 @@
 class PromptJournal:
     def __init__(self):
         self.prompts = [""]
-        self.prompt_number = 0
+        self.prompt_number = 1
 
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
                 "prompts": ("STRING", {"multiline": True, "default": ""}),
-                "prompt_number": ("INT", {"default": 0, "min": 0, "step": 1}),
+                "prompt_number": ("INT", {"default": 1, "min": 1, "max": 4096, "step": 1}),
             },
         }
 
     RETURN_TYPES = ("STRING", "STRING")
     FUNCTION = "process"
-    CATEGORY = "🎬🔀MediaMixer"
+    CATEGORY = "Text"
 
     def process(self, prompts, prompt_number):
         self.prompts = prompts.split('\n')
@@ -24,7 +24,7 @@ class PromptJournal:
         non_empty_prompts = [prompt for prompt in self.prompts if prompt.strip()]
 
         # Wrap around the prompt_number if it's too high
-        effective_prompt_number = self.prompt_number % len(non_empty_prompts)
+        effective_prompt_number = (self.prompt_number - 1) % len(non_empty_prompts)
 
         # Get the selected prompt
         prompt = non_empty_prompts[effective_prompt_number]
