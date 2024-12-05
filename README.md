@@ -1,5 +1,5 @@
 # 🎬🔀MediaMixer
-A node suite for downloading audio and video from youtube as we all sevral useful video utilits such as a final frame selector and a node that merges two videos into one.
+A video utility node suite for ComfyUI
 ****
 
 ## Installation
@@ -21,12 +21,6 @@ If this fails to install yt_dlp to your desired python environment, use the foll
 ```
 
 ## Nodes
-
-### Prompt Journal
-
-Take a list of text and output a single row as a string of text from the top outout string and/or the full text from the second string output. Use with a primitive to randomize or have further control.
-
-![Screenshot 2024-11-23 150431](https://github.com/user-attachments/assets/b5e8eaab-5d51-4e91-b17f-07c1cb422d52)
 
 ### Video Merge Node
 
@@ -51,6 +45,13 @@ First Frame Selector will do the same but with the first frame, this was a reque
 Inverse the order of the images in a frame sequence with this node to easily reverse videos.
 
 ![Screenshot 2024-11-26 121318](https://github.com/user-attachments/assets/6122641e-0b72-4c8a-96f9-c819b80f6711)
+
+### Prompt Journal
+
+Take a list of text and output a single row as a string of text from the top outout string and/or the full text from the second string output. Use with a primitive to randomize or have further control.
+
+![Screenshot 2024-11-23 150431](https://github.com/user-attachments/assets/b5e8eaab-5d51-4e91-b17f-07c1cb422d52)
+This was created to easily batch video prompts from within ComfyUI.
 
 ## Credits
 
