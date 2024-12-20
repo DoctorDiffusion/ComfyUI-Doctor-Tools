@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-mediamixer"
+description = "A node suite for downloading audio and video from youtube as we all sevral useful video utilits such as a final frame selector and a node that merges two videos into one."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["torch", "yt_dlp"]
+
+[project.urls]
+Repository = "https://github.com/DoctorDiffusion/ComfyUI-MediaMixer"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-MediaMixer"
+Icon = ""
